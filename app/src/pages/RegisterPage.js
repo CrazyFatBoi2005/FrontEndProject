@@ -3,37 +3,38 @@ import { AuthContext } from '../auth/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
-export default function LoginPage() {
-  const { login, resetPassword } = useContext(AuthContext);
-  const [email, setEmail]         = useState('');
-  const [password, setPassword]   = useState('');
-  const [error, setError]         = useState('');
+export default function RegisterPage() {
+  const { register } = useContext(AuthContext);
+  const [email, setEmail]     = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName]       = useState('');
+  const [error, setError]     = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await register(email, password, name);
       navigate('/');
-    } catch {
-      setError('Неверный email или пароль');
-    }
-  };
-
-  const handleReset = async () => {
-    try {
-      await resetPassword(email);
-      alert('Письмо для сброса пароля отправлено');
-    } catch {
-      alert('Ошибка при отправке письма');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
     <Container className="auth-container">
-      <h2 className="form-title">Вход</h2>
+      <h2 className="form-title">Регистрация</h2>
       {error && <Alert variant="danger" className="alert-custom">{error}</Alert>}
-      <Form onSubmit={handleLogin} className="auth-form">
+      <Form onSubmit={handleSubmit} className="auth-form">
+        <Form.Group className="mb-3">
+          <Form.Label>Имя</Form.Label>
+          <Form.Control
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+          />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -52,11 +53,8 @@ export default function LoginPage() {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">Войти</Button>
-        <Link to="/forgot-password" className="link-reset">Забыли пароль?</Link>
-        <Link to="/register" className="link-reset">
-          Нет аккаунта? Регистрация
-        </Link>
+        <Button variant="primary" type="submit">Зарегистрироваться</Button>
+        <Link to="/login" className="link-reset">Уже есть аккаунт? Войти</Link>
       </Form>
     </Container>
   );

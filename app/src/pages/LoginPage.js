@@ -54,6 +54,7 @@ export default function LoginPage() {
         </Form.Group>
         <Button variant="primary" type="submit">Войти</Button>
         <Link to="/forgot-password" className="link-reset">Забыли пароль?</Link>
+         <br></br>
         <Link to="/register" className="link-reset">
           Нет аккаунта? Регистрация
         </Link>

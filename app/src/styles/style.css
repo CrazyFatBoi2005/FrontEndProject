@@ -1,4 +1,78 @@
-/* Секция фильтров */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --card-bg: #fafafa;
+  --primary-color: #0069d9;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #eaeaea;
+  --card-bg: #2c2c2c;
+  --primary-color: #339af0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Navbar */
+.app-navbar {
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.app-navbar .navbar-brand,
+.app-navbar .nav-link,
+.app-navbar .navbar-text {
+  color: var(--text-color) !important;
+}
+.app-navbar .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.app-navbar .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Main container */
+.main-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+/* Add Task Form */
+.add-task-form {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+.add-task-form h4 {
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.add-task-fields {
+  display: flex;
+  gap: 1rem;
+}
+.add-task-fields > * {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.add-task-btn {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Filters */
 .filters {
   display: flex;
   gap: 1rem;
@@ -6,241 +80,180 @@
   margin-bottom: 20px;
   align-items: center;
 }
-
-/* Поле поиска */
-.filters .form-control.search {
-  flex: 1;
-  min-width: 150px;
-}
-
-/* Селект сортировки */
+.filters .form-control,
 .filters .form-select {
-  max-width: 180px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.filters .form-control::placeholder {
+  color: rgba(0,0,0,0.5);
 }
 
-/* Пагинация */
+/* Task List */
+.task-list {
+  width: 100%;
+}
+.task-list .list-group-item {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: rgba(255,255,255,0.2);
+}
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.task-item .task-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.task-item .task-date {
+  font-size: 0.85rem;
+}
+.badge-priority {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+.badge-super { background-color: #dc3545; }
+.badge-medium { background-color: #28a745; }
+.badge-low { background-color: #007bff; }
+
+/* Pagination */
 .pagination-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-
 .pagination-wrapper .page-item .page-link {
-  color: #0069d9;
+  color: var(--primary-color);
 }
 .pagination-wrapper .page-item.active .page-link {
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-
-.app-navbar .nav-link {
-  margin-right: 1rem;
+/* Modal (Edit Task) */
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+.modal-content .form-control,
+.modal-content .form-select {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.modal-content .form-control::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+.modal-content .btn-secondary {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text-color);
+}
+.modal-content .btn-secondary:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 
-.app-navbar .navbar-brand {
-  font-weight: 600;
-}
-
-.app-navbar img {
-  object-fit: cover;
-}
-
-
-/* Профиль пользователя */
+/* Profile Page */
 .profile-container {
   max-width: 500px;
   margin: 40px auto;
   padding: 30px;
-  background: #fff;
+  background-color: var(--card-bg);
+  color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
-
-.profile-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.profile-avatar {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-}
-
-.profile-form .form-group {
-  margin-bottom: 15px;
-}
-
+.profile-form .form-group { margin-bottom: 15px; }
 .profile-form .btn-primary {
   width: 100%;
   padding: 10px;
   font-weight: 500;
-}
-
-.profile-section {
-  margin-bottom: 30px;
-}
-
-/* Navbar */
-.app-navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.app-navbar .navbar-brand {
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.app-navbar .nav-link {
-  font-size: 1rem;
-  margin-right: 1rem;
-}
-
-.app-navbar .navbar-text {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.app-navbar .btn-outline-danger {
-  border-color: #dc3545;
-  color: #dc3545;
-}
-
-.app-navbar .btn-outline-danger:hover {
-  background-color: #dc3545;
+  background-color: var(--primary-color);
+  border: none;
   color: #fff;
 }
 
+/* Auth Pages */
 .auth-container {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .auth-form .form-label {
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .auth-form .form-control {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .auth-form .btn-primary {
-    width: 100%;
-    padding: 10px;
-    font-weight: 500;
-    background-color: #0069d9;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  .auth-form .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .auth-form .link-reset {
-    display: block;
-    margin-top: 10px;
-    text-align: right;
-    font-size: 0.9rem;
-  }
-  
-  .alert-custom {
-    margin-bottom: 15px;
-  }
-/* Ограничиваем ширину всей главной страницы и центрируем */
-.main-container {
-    max-width: 600px;   /* или другая удобная вам ширина */
-    margin: 40px auto;  /* центрируем по горизонтали и даём отступ сверху */
-    padding: 0 15px;    /* внутренние отступы */
-  }
-  
-  /* Форма добавления растягивается на всю ширину контейнера */
-  .add-task-form {
-    background: #fafafa;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    margin-bottom: 30px; /* отступ снизу перед списком */
-  }
-  
-  /* Заголовок формы */
-  .add-task-form h4 {
-    margin-bottom: 15px;
-    font-weight: 500;
-  }
-  
-  /* Список задач тоже занимает всю ширину контейнера */
-  .task-list {
-    width: 100%;
-  }
-  
-  /* Заголовок задачи */
-  .task-item .task-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-  
-  /* Мелкая дата */
-  .task-item .task-date {
-    font-size: 0.85rem;
-    color: #666;
-  }
-  
-  /* Кнопки действия */
-  .task-item .btn-outline-secondary,
-  .task-item .btn-outline-danger {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.85rem;
-  }
-  
-  /* Секция добавления новой задачи */
-  .add-task-form {
-    background: #fafafa;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-  
-  /* Заголовок и кнопка в форме */
-  .add-task-form h4 {
-    margin-bottom: 15px;
-    font-weight: 500;
-  }
-  
-  /* Отступы в модалке */
-  .modal-body .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Кнопки в футере модалки */
-  .modal-footer .btn {
-    min-width: 80px;
-  }
-  
-  /* Скрытый список, когда нет задач */
-  .no-tasks {
-    text-align: center;
-    color: #888;
-    padding: 15px 0;
-  }
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.auth-form .form-label { color: var(--text-color); }
+.auth-form .form-control {
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-weight: 500;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+}
+
+/* Misc */
+.no-tasks {
+  text-align: center;
+  color: rgba(0,0,0,0.5);
+  padding: 15px 0;
+}
+@media (max-width: 575px) {
+  .task-item { padding: 0.75rem; }
+}
+@media (min-width: 768px) {
+  .add-task-form { padding: 1.5rem; }
+}
+
+[data-theme="dark"] .filters .form-control.search {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+[data-theme="dark"] .filters .form-control.search::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+[data-theme="dark"] .profile-form .form-control,
+[data-theme="dark"] .profile-form .form-select {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+[data-theme="dark"] .profile-form .form-control::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+[data-theme="dark"] .profile-section .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+.profile-avatar {
+  width: 100px !important;
+  height: 100px !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 15px;
+}

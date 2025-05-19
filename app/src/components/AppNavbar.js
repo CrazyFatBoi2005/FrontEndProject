@@ -1,58 +1,67 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navbar, Container, Nav, Button, Image } from 'react-bootstrap';
+import { Navbar, Container, Nav, Button, Image, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
+import { ThemeContext } from '../theme/ThemeContext';
 import { fetchUserProfile } from '../services/userService';
 
 export default function AppNavbar() {
   const { user, logout } = useContext(AuthContext);
+  const { theme, toggle } = useContext(ThemeContext);
   const [avatarURL, setAvatarURL] = useState('');
+  const [role, setRole] = useState('');
 
   useEffect(() => {
     if (!user) return;
-    (async () => {
-      try {
-        const profile = await fetchUserProfile(user.uid);
+    fetchUserProfile(user.uid)
+      .then(profile => {
         setAvatarURL(profile?.avatarURL || '');
-      } catch (err) {
-        console.error('Не удалось загрузить аватар:', err);
-      }
-    })();
+        setRole(profile?.role || '');
+      })
+      .catch(console.error);
   }, [user]);
 
   return (
-    <Navbar bg="light" expand="md" className="app-navbar">
+    <Navbar expand="md" className="app-navbar">
       <Container>
-        <Navbar.Brand href="/">ToDo</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          ToDo
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Главная</Nav.Link>
-            <Nav.Link href="/profile">Профиль</Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Главная
+            </Nav.Link>
+            <Nav.Link as={Link} to="/profile">
+              Профиль
+            </Nav.Link>
+            {role === 'admin' && (
+              <Nav.Link as={Link} to="/admin">
+                Админ-панель
+              </Nav.Link>
+            )}
           </Nav>
           <Nav className="align-items-center">
-            {avatarURL
-              ? (
-                <Image 
-                  src={avatarURL} 
-                  roundedCircle 
-                  width={32} 
-                  height={32} 
-                  className="me-2"
-                  alt="avatar"
-                />
-              )
-              : (
-                <div className="me-2" style={{
-                  width: 32, height: 32, 
-                  background: '#ccc', borderRadius: '50%'
-                }} />
-              )
-            }
-            <Button
-              variant="outline-danger"
-              size="sm"
-              onClick={logout}
-            >
+            <Form.Check
+              type="switch"
+              id="theme-switch"
+              label={theme === 'light' ? '🌞' : '🌜'}
+              checked={theme === 'dark'}
+              onChange={toggle}
+              className="me-3"
+            />
+            {avatarURL && (
+              <Image
+                src={avatarURL}
+                roundedCircle
+                width={32}
+                height={32}
+                className="me-2"
+                alt="avatar"
+              />
+            )}
+            <Button variant="outline-danger" size="sm" onClick={logout}>
               Выйти
             </Button>
           </Nav>
